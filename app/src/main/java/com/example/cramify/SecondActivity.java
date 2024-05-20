@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ public class SecondActivity extends AppCompatActivity implements CardAdapter.OnC
 
     Dialog addDialog, updateDialog;
     TextView deck_title;
+
+    ImageButton backButton;
     String DECK_ID, DECK_NAME;
 
     RecyclerView recyclerView;
@@ -29,12 +32,19 @@ public class SecondActivity extends AppCompatActivity implements CardAdapter.OnC
     ArrayList<String> card_id, card_question, card_answer;
     DBHelper DB;
 
+    int userId; // User ID
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
 
+        // Get user ID from intent extras
+        userId = getIntent().getIntExtra("USER_ID", -1);
+
         deck_title = findViewById(R.id.deck_title);
+        backButton = findViewById(R.id.backButton);
+
         DB = new DBHelper(this);
 
         addDialog = new Dialog(this);
@@ -63,6 +73,16 @@ public class SecondActivity extends AppCompatActivity implements CardAdapter.OnC
                 intent.putStringArrayListExtra("answers", card_answer);
                 intent.putExtra("DECK_ID", DECK_ID);
                 intent.putExtra("DECK_NAME", DECK_NAME);
+                startActivity(intent);
+            }
+        });
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
+                // Pass the user ID to the HomeActivity
+                intent.putExtra("USER_ID", userId);
                 startActivity(intent);
             }
         });

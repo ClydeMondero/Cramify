@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class HomeActivity extends AppCompatActivity implements CustomAdapter.OnD
     CustomAdapter customAdapter;
     int userId; // User ID
 
+    ImageButton logoutButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,7 @@ public class HomeActivity extends AppCompatActivity implements CustomAdapter.OnD
         // Get user ID from intent extras
         userId = getIntent().getIntExtra("USER_ID", -1);
 
+        logoutButton = findViewById(R.id.logoutButton);
 
         myDialog = new Dialog(this);
         updateDialog = new Dialog(this);
@@ -49,6 +53,15 @@ public class HomeActivity extends AppCompatActivity implements CustomAdapter.OnD
         customAdapter = new CustomAdapter(HomeActivity.this, deck_id, deck_name, this, this); // Pass this as the long click listener
         recyclerView.setAdapter(customAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(HomeActivity.this));
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(HomeActivity.this, "Account Logout Success", Toast.LENGTH_SHORT). show();
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     void displayDeck(){
@@ -167,6 +180,7 @@ public class HomeActivity extends AppCompatActivity implements CustomAdapter.OnD
         Intent intent = new Intent(HomeActivity.this, SecondActivity.class);
         intent.putExtra("DECK_ID", deckId);
         intent.putExtra("DECK_NAME", deckName);
+        intent.putExtra("USER_ID", userId);
         startActivity(intent);
     }
 
