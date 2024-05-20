@@ -1,8 +1,10 @@
 package com.example.cramify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,12 +18,16 @@ import java.util.List;
 public class PlayActivity extends AppCompatActivity {
     private TextView textQuestion, textAnswer;
     private Button buttonShowAnswer, buttonNext;
+
+    private ImageButton buttonBack;
     private CardView questionCardView, answerCardView;
     private ArrayList<String> questions = new ArrayList<>();
     private ArrayList<String> answers = new ArrayList<>();
     private List<QuestionAnswerPair> questionAnswerPairs = new ArrayList<>();
     private int currentCardIndex = 0;
     private boolean isShowingAnswer = false;
+
+    String DECK_ID, DECK_NAME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +40,13 @@ public class PlayActivity extends AppCompatActivity {
         buttonNext = findViewById(R.id.buttonNext);
         questionCardView = findViewById(R.id.questionCardView);
         answerCardView = findViewById(R.id.answerCardView);
+        buttonBack = findViewById(R.id.backBtn);
 
         // Get data from intent
         questions = getIntent().getStringArrayListExtra("questions");
         answers = getIntent().getStringArrayListExtra("answers");
+
+        getData();
 
         if (questions == null || answers == null || questions.isEmpty() || answers.isEmpty()) {
             Toast.makeText(this, "No questions or answers provided", Toast.LENGTH_SHORT).show();
@@ -69,8 +78,26 @@ public class PlayActivity extends AppCompatActivity {
                 showNextCard();
             }
         });
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(PlayActivity.this, SecondActivity.class);
+                intent.putExtra("DECK_ID", DECK_ID);
+                intent.putExtra("DECK_NAME", DECK_NAME);
+                startActivity(intent);
+            }
+        });
     }
 
+    private void getData() {
+        if (getIntent().hasExtra("DECK_ID") && getIntent().hasExtra("DECK_NAME")) {
+            DECK_ID = getIntent().getStringExtra("DECK_ID");
+            DECK_NAME = getIntent().getStringExtra("DECK_NAME");
+        } else {
+            Toast.makeText(this, "No Data.", Toast.LENGTH_SHORT).show();
+        }
+    }
     private void setCard(int index) {
         QuestionAnswerPair pair = questionAnswerPairs.get(index);
         textQuestion.setText(pair.getQuestion());

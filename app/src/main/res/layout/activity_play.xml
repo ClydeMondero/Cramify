@@ -5,12 +5,13 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:id="@+id/cardLayout"
+    android:background="@color/purple"
     >
 
     <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignStart="@id/questionCardView"
         android:background="@drawable/back" />
 
@@ -32,6 +33,7 @@
             android:layout_marginTop="100dp"
             android:gravity="center"
             android:text="Question"
+            android:textColor="@color/lightPurple"
             android:textSize="20sp" />
 
         <Button
@@ -42,6 +44,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="90dp"
             android:layout_marginTop="250dp"
+            android:backgroundTint="@color/lightPink"
             android:text="Show Answer" />
     </androidx.cardview.widget.CardView>
 
@@ -49,21 +52,21 @@
         android:id="@+id/answerCardView"
         android:layout_width="317dp"
         android:layout_height="307dp"
-        android:layout_below="@id/questionCardView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_below="@+id/backBtn"
+        android:layout_marginTop="14dp"
         android:visibility="gone"
-        app:cardCornerRadius="8dp"
-        android:background="@drawable/card_background">
+        android:background="@drawable/card_background"
+        app:cardCornerRadius="8dp">
 
         <TextView
             android:id="@+id/textAnswer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="16dp"
             android:layout_marginTop="100dp"
+            android:padding="16dp"
+            android:gravity="center"
             android:text="Answer"
+            android:textColor="@color/lightPurple"
             android:textSize="20sp" />
 
         <Button
@@ -72,8 +75,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/textAnswer"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="250dp"
             android:layout_marginLeft="110dp"
+            android:layout_marginTop="250dp"
+            android:backgroundTint="@color/lightPink"
             android:text="Next" />
     </androidx.cardview.widget.CardView>
 

@@ -61,6 +61,8 @@ public class SecondActivity extends AppCompatActivity implements CardAdapter.OnC
                 Intent intent = new Intent(SecondActivity.this, PlayActivity.class);
                 intent.putStringArrayListExtra("questions", card_question);
                 intent.putStringArrayListExtra("answers", card_answer);
+                intent.putExtra("DECK_ID", DECK_ID);
+                intent.putExtra("DECK_NAME", DECK_NAME);
                 startActivity(intent);
             }
         });
