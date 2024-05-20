@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="white">#FBFBFE</color>
+    <color name="white">#F0F0F4</color>
     <color name="lightPink">#E1AFD1</color>
     <color  name="lightPurple">#AD88C6</color>
     <color name="purple">#7469B6</color>

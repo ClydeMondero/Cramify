@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Cramify</string>
-    <string name="register"><u>Don't have an account? Register</u></string>
+    <string name="register"><u>Don\'t have an account? Register</u></string>
+    <string name="login"><u>Already have an account? Login</u></string>
 </resources>
